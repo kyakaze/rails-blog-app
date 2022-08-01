@@ -1,0 +1,6 @@
+<h1>Editing Comment</h1>
+
+<%= render 'edit_form', blog: @blog, comment: @comment %>
+
+<%= link_to 'Show', blog_comment_path(@blog, @comment) %> |
+<%= link_to 'Back', blog_comments_path(@blog) %>
