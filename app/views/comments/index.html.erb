@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Comments for Blog <%= @blog.title %></h1>
+
+<table cellpadding="5" cellspacing="5">
+  <thead>
+    <tr>
+      <th>Commentor</th>
+      <th>Body</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.commenter %></td>
+        <td><%= comment.body %></td>
+        <td><%= link_to 'Show', blog_comment_path(@blog, comment) %></td>
+        <td><%= link_to 'Edit', edit_blog_comment_path(@blog, comment) %></td>
+        <td><%= link_to 'Destroy', blog_comment_path(@blog, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment', new_blog_comment_path %>

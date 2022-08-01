@@ -1,0 +1,17 @@
+<%= form_for(comment, :url => blog_comment_path(blog, comment)) do |f| %>
+  <% if comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+      <% comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= render 'form_fields', f: f %>
+
+<% end %>
+

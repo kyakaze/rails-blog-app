@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Commentor:</strong>
+  <%= @comment.commenter %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @comment.body %>
+</p>
+
+<%= link_to 'Edit', edit_blog_comment_path(@blog, @comment) %> |
+<%= link_to 'Back', blog_comments_path(@blog) %>

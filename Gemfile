@@ -38,6 +38,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'pry', '~> 0.13.1'
+
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
