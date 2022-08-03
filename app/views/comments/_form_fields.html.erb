@@ -1,11 +1,12 @@
-<div class="field">
+<div class="field form-group">
   <%= f.label :commenter %><br />
-  <%= f.text_field :commenter %>
+  <%= f.text_field :commenter, class:"form-control", placeholder: "What we should call you?" %>
 </div>
-<div class="field">
+<div class="field form-group">
   <%= f.label :body %><br />
-  <%= f.text_area :body %>
+  <%= f.text_area :body, class:"form-control", placeholder: "Your feedback means a lot to us!" %>
 </div>
 <div class="actions">
-  <%= f.submit %>
+  <%= f.submit class:"btn btn-dark"%>
 </div>
+</br>
