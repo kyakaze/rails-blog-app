@@ -7,3 +7,8 @@
 .hidden {
   display: none;
 }
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+}

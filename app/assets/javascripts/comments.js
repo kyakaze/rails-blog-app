@@ -15,9 +15,9 @@ function handleEditClick(blogId, commentId ) {
     oldForm.remove();
   }
   // add new form
-  const form = formBuilder(blogId, commentId)
   commentFormId = `form-${blogId}-${commentId}`
-  form.setAttribute('id', commentFormId);
+  const form = formBuilder(blogId, commentId, commentFormId)
+
   const card = document.getElementById(`${blogId}-${commentId}`);
   insertAfter(form, card);
 }
@@ -26,7 +26,7 @@ function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
-function formBuilder(blogId, commentId){
+function formBuilder(blogId, commentId, formId){
   const formData = {
     bodyLabel: {
       tag: 'label',
@@ -45,12 +45,23 @@ function formBuilder(blogId, commentId){
       tag: 'input',
       attrs: {
         type: 'submit',
+        class: 'btn btn-primary',
         value: 'Update',
+      }
+    },
+    cancel: {
+      tag: 'input',
+      attrs: {
+        type: 'button',
+        class: 'btn btn-secondary',
+        value: 'Cancel',
+        onclick: `closeCommentForm('${formId}')`
       }
     }
   };
 
   const form = document.createElement("form");
+  form.setAttribute('id', formId)
   form.classList.add('comment-form');
   form.setAttribute('action', `/blogs/${blogId}/comments/${commentId}.json`)
   const fields = Object.values(formData).map(fieldData => {
