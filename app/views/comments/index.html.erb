@@ -18,7 +18,7 @@
         <td><%= comment.body %></td>
         <td><%= link_to 'Show', blog_comment_path(@blog, comment) %></td>
         <td><%= link_to 'Edit', edit_blog_comment_path(@blog, comment) %></td>
-        <td><%= link_to 'Destroy', blog_comment_path(@blog, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+        <td><%= link_to 'Destroy', blog_comment_path(@blog, comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td> 
       </tr>
     <% end %>
   </tbody>

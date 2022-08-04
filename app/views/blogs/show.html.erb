@@ -24,6 +24,13 @@
 </div>   
 <% end %>
 </br>
+
+<form id='comment-form' class='comment-form hidden'>
+  <label for='body'> Body</label>
+  <input type='text' name='body' />
+  <input type='submit' value='update' />
+</form>
+
 <h4>Listing Comments for Blog <%= @blog.title %></h4>
 
 <table class="table table-striped">
@@ -43,8 +50,8 @@
         <td><%= comment.commenter %></td>
         <td><%= comment.body %></td>
         <td><%= link_to 'Show', blog_comment_path(@blog, comment), class:"btn btn-outline-primary" %></td>
-        <td><%= link_to 'Edit', edit_blog_comment_path(@blog, comment), class:"btn btn-outline-secondary", id: "edit-link" %></td>
-        <td><%= link_to 'Destroy', blog_comment_path(@blog, comment), class:"btn btn-outline-danger", method: :delete, data: { confirm: 'Do you confirm the comment deletion?' } %></td> 
+        <td><button class="btn btn-outline-secondary" id= "edit-link" onclick='handleEditClick(<%= @blog.id %>, <%= comment.id %>)'>EDIT</button></td>
+        <td><%= link_to 'Destroy', blog_comment_path(@blog, comment), class:"btn btn-outline-danger comment-delete", method: :delete, remote: true, data: { confirm: 'Do you confirm the comment deletion?' } %></td> 
       </tr>
       <% end %>
   </tbody>

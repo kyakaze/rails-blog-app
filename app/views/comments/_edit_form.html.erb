@@ -11,7 +11,14 @@
     </div>
   <% end %>
 
-  <%= render 'form_fields', f: f %>
+  <div class="field form-group">
+    <%= f.label :body %><br />
+    <%= f.text_area :body, class:"form-control", placeholder: "Your feedback means a lot to us!" %>
+  </div>
+  <div class="actions">
+    <%= f.submit class:"btn btn-dark"%>
+  </div>
+  </br>
 
 <% end %>
 

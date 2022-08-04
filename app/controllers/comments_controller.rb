@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   #First: Separate page for comments
   before_action :set_blog
   before_action :set_comment, only: [:show, :edit, :update, :destroy] 
+  skip_before_action :verify_authenticity_token, only: [:update]
 
   def index
     @comments = @blog.comments.all
@@ -18,7 +19,7 @@ class CommentsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @comment.update(comment_params)
+      if @comment.update(update_comment_params)
         format.html { redirect_to blog_comment_path(@blog, @comment), notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: blog_comment_path(@blog, @comment) }
         format.js
@@ -48,6 +49,7 @@ class CommentsController < ApplicationController
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to blog_comments_path(@blog), notice: 'Comment was successfully destroyed.' }
+      format.js
       format.json { head :no_content }
     end
   end
@@ -74,4 +76,12 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:body, :commenter)
   end
+
+  def update_comment_params
+    params.require(:comment).permit(:body)
+  end
 end
+
+# toggle form open
+# pass correct ID to form
+# use that ID to send request to -> Update blogs/1/comments/:id params: { comment: { body: 'khoakhoa'} }
