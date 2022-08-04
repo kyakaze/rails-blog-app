@@ -1,0 +1,14 @@
+
+<div class="blog-comments__comment-card" id="<%= blog.id %>-<%= comment.id %>">
+  <div class='blog-comments__comment-card-header'>
+    <p><%= comment.commenter %> <small>Posted <%= time_ago_in_words comment.created_at %> ago</small></p>
+  </div>
+  <div class='blog-comments__comment-card-body'><%== comment.body %> </div>
+  <div class='blog-comments__comment-card-footer'>
+    <% if comment.updated_at != comment.created_at %>
+    <small class='blog-comments__comment-card-updated-time'>Updated:  <%= time_ago_in_words comment.updated_at %> ago</small>
+    <% end %>
+    <button class="btn btn-outline-secondary" onclick='handleEditClick(<%= blog.id %>, <%= comment.id %>)'>EDIT</button>
+    <%= link_to 'Destroy', blog_comment_path(blog, comment), class:"btn btn-outline-danger comment-delete", method: :delete, remote: true, data: { confirm: 'Do you confirm the comment deletion?' } %>
+  </div>
+</div>

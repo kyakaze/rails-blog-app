@@ -25,35 +25,12 @@
 <% end %>
 </br>
 
-<form id='comment-form' class='comment-form hidden'>
-  <label for='body'> Body</label>
-  <input type='text' name='body' />
-  <input type='submit' value='update' />
-</form>
+
 
 <h4>Listing Comments for Blog <%= @blog.title %></h4>
+<% @blog.comments.each do |comment| %>
+  <%= render 'comment_card', blog: @blog, comment: comment %>
+<% end %>
 
-<table class="table table-striped">
-  <thead class="thead-dark">
-    <tr>
-      <th>Created at</th>
-      <th>Commentor</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.created_at.strftime('%l:%M %p') %></td>
-        <td><%= comment.commenter %></td>
-        <td><%= comment.body %></td>
-        <td><%= link_to 'Show', blog_comment_path(@blog, comment), class:"btn btn-outline-primary" %></td>
-        <td><button class="btn btn-outline-secondary" id= "edit-link" onclick='handleEditClick(<%= @blog.id %>, <%= comment.id %>)'>EDIT</button></td>
-        <td><%= link_to 'Destroy', blog_comment_path(@blog, comment), class:"btn btn-outline-danger comment-delete", method: :delete, remote: true, data: { confirm: 'Do you confirm the comment deletion?' } %></td> 
-      </tr>
-      <% end %>
-  </tbody>
-</table>
 </br>

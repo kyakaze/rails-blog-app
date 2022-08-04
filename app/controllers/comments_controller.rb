@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
   #First: Separate page for comments
   before_action :set_blog
   before_action :set_comment, only: [:show, :edit, :update, :destroy] 
-  skip_before_action :verify_authenticity_token, only: [:update]
 
   def index
     @comments = @blog.comments.all
@@ -21,7 +20,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update(update_comment_params)
         format.html { redirect_to blog_comment_path(@blog, @comment), notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: blog_comment_path(@blog, @comment) }
+        format.json { render json: @comment, location: blog_comment_path(@blog, @comment) }
         format.js
       else
         format.html { render :edit }
