@@ -16,7 +16,5 @@
 !/log/.keep
 /tmp
 node_modules/
-/config/application.yml
-/config/test.erb
 *.bak
 config/secrets.yml
