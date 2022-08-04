@@ -1,14 +1,52 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @blog.title %>
-</p>
 
-<p>
-  <strong>Body:</strong>
-  <%= @blog.body %>
-</p>
+<div class="jumbotron">
+<h1 class="display-4"><%= @blog.title %></h1>
+  <p class="lead"><%= @blog.body %></p>
+  <p class="lead">
+  <%= link_to 'Edit', edit_blog_path(@blog), class:"btn btn-dark" %> |
+  <%= link_to 'Back', blogs_path, class:"btn btn-dark" %>
+  </p>
+</div>
 
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>
+<%= form_for [@blog, @comment] do |f| %>
+  <div class="field form-group">
+  <%= f.label :commenter %><br />
+  <%= f.text_field :commenter, class:"form-control" , placeholder: "What we should call  you?"%>
+</div>
+<div class="field form-group">
+  <%= f.label :body %><br />
+  <%= f.text_area :body, class:"form-control" , placeholder: "Your feedback means a lot to us!"%>
+</div>
+<div class="actions">
+  <%= f.submit class:"btn btn-dark"%>
+</div>   
+<% end %>
+</br>
+<h4>Listing Comments for Blog <%= @blog.title %></h4>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>Created at</th>
+      <th>Commentor</th>
+      <th>Body</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.created_at.strftime('%l:%M %p') %></td>
+        <td><%= comment.commenter %></td>
+        <td><%= comment.body %></td>
+        <td><%= link_to 'Show', blog_comment_path(@blog, comment), class:"btn btn-outline-primary" %></td>
+        <td><%= link_to 'Edit', edit_blog_comment_path(@blog, comment), class:"btn btn-outline-secondary", id: "edit-link" %></td>
+        <td><%= link_to 'Destroy', blog_comment_path(@blog, comment), class:"btn btn-outline-danger", method: :delete, data: { confirm: 'Do you confirm the comment deletion?' } %></td> 
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+</br>

@@ -2,8 +2,8 @@
 
 <h1>Listing Comments for Blog <%= @blog.title %></h1>
 
-<table cellpadding="5" cellspacing="5">
-  <thead>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
       <th>Commentor</th>
       <th>Body</th>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Comment', new_blog_comment_path %>
+<%= link_to 'New Comment', new_blog_comment_path, class:"btn btn-dark" %>

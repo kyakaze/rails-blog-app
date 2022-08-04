@@ -1,14 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+
+<div class="jumbotron">
+<h1 class="display-4">
   <strong>Commentor:</strong>
   <%= @comment.commenter %>
-</p>
+</h1>
+  <p class="lead">
+    <strong>Body:</strong>
+    <%= @comment.body %>
+  </p>
+  <p class="lead">
+    <%= link_to 'Edit', edit_blog_comment_path(@blog, @comment), class:"btn btn-dark" %> |
+    <%= link_to 'Back', blog_comments_path(@blog), class:"btn btn-dark" %>
+  </p>
+</div>
 
-<p>
-  <strong>Body:</strong>
-  <%= @comment.body %>
-</p>
-
-<%= link_to 'Edit', edit_blog_comment_path(@blog, @comment) %> |
-<%= link_to 'Back', blog_comments_path(@blog) %>
