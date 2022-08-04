@@ -5,9 +5,9 @@
   </div>
   <div class='blog-comments__comment-card-body'><%== comment.body %> </div>
   <div class='blog-comments__comment-card-footer'>
-    <% if comment.updated_at != comment.created_at %>
-    <p class='blog-comments__comment-card-updated-time'>Updated:  <%= time_ago_in_words comment.updated_at %> ago</p>
-    <% end %>
+
+    <p class='blog-comments__comment-card-updated-time <%= comment.updated_at == comment.created_at ? 'hidden' : ''%>'>Updated:  <%= time_ago_in_words comment.updated_at %> ago</p>
+
     <button 
       class="btn btn-outline-secondary" 
       onclick='handleEditClick(<%= blog.id %>, <%= comment.id %>)'

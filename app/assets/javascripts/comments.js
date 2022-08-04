@@ -114,6 +114,8 @@ function handleSubmitComment(e){
 function updateComment(data) {
   const card = document.getElementById(`${data.blog_id}-${data.id}`)
   if (!card) return;
-  card.getElementsByClassName('blog-comments__comment-card-body')[0].innerHTML = data.body
-  card.getElementsByClassName('blog-comments__comment-card-updated-time')[0].innerHTML = `Updated: ${DateHelper.time_ago_in_words(data.updated_at)}`
+  card.getElementsByClassName('blog-comments__comment-card-body')[0].innerHTML = data.body;
+  const updatedTimeEl = card.getElementsByClassName('blog-comments__comment-card-updated-time')[0];
+  updatedTimeEl.classList.remove('hidden');
+  updatedTimeEl.innerHTML = `Updated: ${DateHelper.time_ago_in_words(data.updated_at)}`
 }
