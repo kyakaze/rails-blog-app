@@ -8,7 +8,15 @@
     <% if comment.updated_at != comment.created_at %>
     <small class='blog-comments__comment-card-updated-time'>Updated:  <%= time_ago_in_words comment.updated_at %> ago</small>
     <% end %>
-    <button class="btn btn-outline-secondary" onclick='handleEditClick(<%= blog.id %>, <%= comment.id %>)'>EDIT</button>
+    <button 
+      class="btn btn-outline-secondary" 
+      onclick='handleEditClick(<%= blog.id %>, <%= comment.id %>)'
+      data-toggle="collapse" data-target="#collapse-<%= blog.id %>-<%= comment.id %>" aria-expanded="false" aria-controls="collapse-<%= blog.id %>-<%= comment.id %>"
+    >
+      EDIT
+    </button>
     <%= link_to 'Destroy', blog_comment_path(blog, comment), class:"btn btn-outline-danger comment-delete", method: :delete, remote: true, data: { confirm: 'Do you confirm the comment deletion?' } %>
+  </div>
+  <div class="collapse" id="collapse-<%= blog.id %>-<%= comment.id %>" data-parent="#comment-list">
   </div>
 </div>

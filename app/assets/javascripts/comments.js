@@ -18,8 +18,9 @@ function handleEditClick(blogId, commentId ) {
   commentFormId = `form-${blogId}-${commentId}`
   const form = formBuilder(blogId, commentId, commentFormId)
 
-  const card = document.getElementById(`${blogId}-${commentId}`);
-  insertAfter(form, card);
+  const card = document.getElementById(`collapse-${blogId}-${commentId}`);
+  card.appendChild(form)
+  // insertAfter(form, card);
 }
 
 function insertAfter(newNode, referenceNode) {
@@ -55,7 +56,10 @@ function formBuilder(blogId, commentId, formId){
         type: 'button',
         class: 'btn btn-secondary',
         value: 'Cancel',
-        onclick: `closeCommentForm('${formId}')`
+        // onclick: `closeCommentForm('${formId}')`,
+        'data-toggle': "collapse",
+        'data-target': `#collapse-${blogId}-${commentId}`,'aria-expanded': "false",
+        'aria-controls': `#collapse-${blogId}-${commentId}`,
       }
     }
   };
