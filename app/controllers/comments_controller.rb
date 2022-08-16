@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   #First: Separate page for comments
+  before_action :authenticate_user!
   before_action :set_blog
   before_action :set_comment, only: [:show, :edit, :update, :destroy] 
 
@@ -31,6 +32,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @blog.comments.new(comment_params)
+    @comment.user = current_user
 
     respond_to do |format|
       if @comment.save

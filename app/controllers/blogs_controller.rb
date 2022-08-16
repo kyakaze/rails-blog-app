@@ -1,8 +1,9 @@
 class BlogsController < ApplicationController
   layout 'blogs'
+  before_action :authenticate_user!, except: [:index]
 
-  before_action :set_blog, only: [:show, :edit, :update, :destroy] 
-
+  before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :verify_owner, only: [:edit, :update, :destroy]
   # GET /blogs
   # GET /blogs.json
   def index
@@ -29,6 +30,7 @@ class BlogsController < ApplicationController
   # POST /blogs.json
   def create
     @blog = Blog.new(blog_params)
+    @blog.user = current_user
 
     respond_to do |format|
       if @blog.save
@@ -73,6 +75,11 @@ class BlogsController < ApplicationController
       rescue ActiveRecord::RecordNotFound
         not_found
       end
+    end
+
+    def verify_owner
+      flash[:notice] = "Not allowed"
+      return redirect_to blogs_path if current_user != @blog.user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
