@@ -74,7 +74,7 @@ class CommentsController < ApplicationController
     end
   end
   def verify_owner
-    flash[:notice] = "Not allowed"
+    flash[:notice] = "You are only allowed to delete your own comments"
     return redirect_to blogs_path if current_user != @blog.user
   end
   # Never trust parameters from the scary internet, only allow the white list through.
