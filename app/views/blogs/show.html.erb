@@ -24,29 +24,14 @@
 </div>   
 <% end %>
 </br>
+
+
+
 <h4>Listing Comments for Blog <%= @blog.title %></h4>
+<div class="comment-list" id='comment-list'>
+<% @blog.comments.each do |comment| %>
+  <%= render 'comment_card', blog: @blog, comment: comment %>
+<% end %>
+</div>
 
-<table class="table table-striped">
-  <thead class="thead-dark">
-    <tr>
-      <th>Created at</th>
-      <th>Commentor</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.created_at.strftime('%l:%M %p') %></td>
-        <td><%= comment.commenter %></td>
-        <td><%= comment.body %></td>
-        <td><%= link_to 'Show', blog_comment_path(@blog, comment), class:"btn btn-outline-primary" %></td>
-        <td><%= link_to 'Edit', edit_blog_comment_path(@blog, comment), class:"btn btn-outline-secondary", id: "edit-link" %></td>
-        <td><%= link_to 'Destroy', blog_comment_path(@blog, comment), class:"btn btn-outline-danger", method: :delete, data: { confirm: 'Do you confirm the comment deletion?' } %></td> 
-      </tr>
-      <% end %>
-  </tbody>
-</table>
 </br>
