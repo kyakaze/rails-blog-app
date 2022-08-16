@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_blog
   before_action :set_comment, only: [:show, :edit, :update, :destroy] 
+  before_action :verify_owner, only: [:edit, :update, :destroy]
 
   def index
     @comments = @blog.comments.all
@@ -72,7 +73,10 @@ class CommentsController < ApplicationController
       not_found
     end
   end
-
+  def verify_owner
+    flash[:notice] = "Not allowed"
+    return redirect_to blogs_path if current_user != @blog.user
+  end
   # Never trust parameters from the scary internet, only allow the white list through.
   def comment_params
     params.require(:comment).permit(:body, :commenter)
@@ -82,7 +86,10 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body)
   end
 end
-
+    def verify_owner
+      flash[:notice] = "Not allowed"
+      return redirect_to blogs_path if current_user != @blog.user
+    end
 # toggle form open
 # pass correct ID to form
 # use that ID to send request to -> Update blogs/1/comments/:id params: { comment: { body: 'khoakhoa'} }
