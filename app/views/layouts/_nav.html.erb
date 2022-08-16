@@ -16,6 +16,23 @@
       <li class="nav-item <%= request.path == blogs_path ? 'active' : '' %>">
       <%= link_to("Blog", blogs_path, class: 'nav-link') %>
     </li>
+    <% if !user_signed_in? %>
+      <li class="nav-item <%= request.path == blogs_path ? 'active' : '' %>">
+        <%= link_to("Sign Up", new_user_registration_path, class: 'nav-link') %>
+      </li>
+      <li class="nav-item <%= request.path == blogs_path ? 'active' : '' %>">
+        <%= link_to("Log in", new_user_session_path, class: 'nav-link') %>
+      </li>
+     <% else %>
+     <li class="nav-item <%= request.path == blogs_path ? 'active' : '' %>">
+       <div class='nav-link'><%= current_user.username %></div>
+     </li>
+     <li class="nav-item <%= request.path == blogs_path ? 'active' : '' %>">
+       <%= link_to("Log out", destroy_user_session_path, method: :delete, class: 'nav-link') %>
+     </li>
+    <% end %>
+
+
     <%#
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
