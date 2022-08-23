@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   devise_for :users
 
   resources :blogs do
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#home'
+  root 'categories#index'
 
   get 'about_us', to: "home#about_us"
 
