@@ -14,10 +14,20 @@
   <div class="field form-group">
     <div class="field form-group">
     <%= f.label :category %><br>
-    <%= f.select :category_id, options_for_select(@categories.collect { |cat| [cat.name, cat.id]})%>
-  </div>
-    <%= f.label :title %><br>
-    <%= f.text_field :title, class:"form-control", placeholder: "You blog title here.." %>
+      <%#= select(:blog, :categories, @categories.collect {|cat| [cat.name, cat.id]},  {}, multiple: true ) %>
+      <%= collection_check_boxes(:blog, :categories, @categories, :id, :name) do |b|
+        b.label { b.check_box + b.text}
+        end
+       %>
+    </div>
+    <div class="field form-group">
+      <%= f.label :new_category %><br>
+      <input type='text' name="blog[new_categories]" class="form-control"  placeholder="Enter new categories here..... Separate with comma">
+    </div>
+    <div class="field form-group">
+      <%= f.label :title %><br>
+      <%= f.text_field :title, class:"form-control", placeholder: "You blog title here.." %>
+    </div>
   </div>
   <div class="field form-group">
     <%= f.label :body %><br>

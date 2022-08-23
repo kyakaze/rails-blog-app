@@ -1,7 +1,9 @@
-<p id="notice"><%= notice %></p>
-<% Category.all.each do |category| %>
-<%= link_to category.name, blogs_path(category: category.name)%>
-</br>
+<p id="notice">
+  <%= notice %>
+</p>
+<% @all_categories.each do |category| %>
+  <%= link_to category.name, blogs_path(categories: [category.id]) %>
+  </br>
 <% end %>
 </br>
 <h1>Listing Blogs</h1>
@@ -21,7 +23,11 @@
       <tr>
         <td><%= blog.title %></td>
         <td><%= blog.body %></td>
-        <td><%= blog.category.name %></td>
+        <td>
+          <% blog.categories.each do |cat| %>
+            <%= cat.name %> &nbsp;
+          <% end %>
+        </td>
         <td><%= link_to 'Show', blog, class:"btn btn-outline-primary" %></td>
         <td><%= link_to 'Edit', edit_blog_path(blog), class:"btn btn-outline-secondary" %></td>
         <td><%= link_to 'Destroy', blog, class:"btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,7 +1,11 @@
 class Blog < ActiveRecord::Base
   has_many :comments, dependent: :destroy
-  has_many :categories
   belongs_to :user
-  belongs_to :category
-  validates :category_id, presence: true
+
+  has_and_belongs_to_many :categories
+
+
+  def has_categories?
+    categories.length > 0
+  end
 end
