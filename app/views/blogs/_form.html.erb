@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="field form-group">
+    <div class="field form-group">
+    <%= f.label :category %><br>
+    <%= f.select :category_id, options_for_select(@categories.collect { |cat| [cat.name, cat.id]})%>
+  </div>
     <%= f.label :title %><br>
     <%= f.text_field :title, class:"form-control", placeholder: "You blog title here.." %>
   </div>

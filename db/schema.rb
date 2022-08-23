@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220816130058) do
+ActiveRecord::Schema.define(version: 20220820130401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,12 +19,22 @@ ActiveRecord::Schema.define(version: 20220816130058) do
   create_table "blogs", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id",    null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id",     null: false
+    t.integer  "category_id"
+    t.string   "category"
   end
 
+  add_index "blogs", ["category"], name: "index_blogs_on_category", unique: true, using: :btree
+  add_index "blogs", ["category_id"], name: "index_blogs_on_category_id", using: :btree
   add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string   "commenter"
@@ -53,6 +63,7 @@ ActiveRecord::Schema.define(version: 20220816130058) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "blogs", "categories"
   add_foreign_key "blogs", "users"
   add_foreign_key "comments", "blogs"
   add_foreign_key "comments", "users"

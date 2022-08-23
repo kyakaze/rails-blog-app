@@ -4,10 +4,16 @@ class BlogsController < ApplicationController
 
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
   before_action :verify_owner, only: [:edit, :update, :destroy]
+  before_action :set_categories
   # GET /blogs
   # GET /blogs.json
   def index
+    if params.has_key?(:category)
+      @category = Category.find_by_name(params[:category])
+      @blogs = Blog.where(category: @category)
+    else
     @blogs = Blog.all
+    end
   end
 
   # GET /blogs/1
@@ -84,6 +90,9 @@ class BlogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
-      params.require(:blog).permit(:title, :body) ## hash
+      params.require(:blog).permit(:title, :body, :category_id) ## hash
+    end
+    def set_categories
+    @categories = Category.all
     end
 end
