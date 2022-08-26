@@ -20,3 +20,4 @@ node_modules/
 *.bak
 config/secrets.yml
 .idea/misc.xml
+.idea/blogapp.iml
